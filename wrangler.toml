@@ -1,0 +1,14 @@
+name = "apex-wellness-v2"
+main = ".open-next/worker.js"
+compatibility_date = "2026-05-28"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "apex-wellness-v2-db"
+database_id = "6ac9a9b1-3ac7-4a53-b3b5-2cde834150ed"
+migrations_dir = "db/migrations"
