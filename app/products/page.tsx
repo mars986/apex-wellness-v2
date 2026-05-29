@@ -1,4 +1,4 @@
-﻿export default function ProductsPage() {
+export default function ProductsPage() {
   return (
     <main className="max-w-7xl mx-auto p-8">
       <h1 className="text-4xl font-bold">
