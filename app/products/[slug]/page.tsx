@@ -131,9 +131,17 @@ const referralUnlocked = await hasReferralCode();
         </p>
 
 {referralUnlocked ? (
-  <button className="mt-4 rounded-lg bg-slate-950 px-5 py-3 text-white">
-    Add To Cart
-  </button>
+  <form action="/api/cart/add" method="POST">
+    <input
+      type="hidden"
+      name="slug"
+      value={slug}
+    />
+
+    <button className="mt-4 rounded-lg bg-slate-950 px-5 py-3 text-white">
+      Add To Cart
+    </button>
+  </form>
 ) : (
   <button
     className="mt-4 rounded-lg bg-slate-950 px-5 py-3 text-white opacity-50"
