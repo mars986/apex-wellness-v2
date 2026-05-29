@@ -19,7 +19,9 @@ export async function POST() {
         name: item.name,
         description: item.variant,
       },
-      unit_amount: Math.round(Number(item.price.replace("$", "")) * 100),
+      unit_amount: Math.round(
+        Number(item.price.replace("$", "")) * 100
+      ),
     },
   }));
 

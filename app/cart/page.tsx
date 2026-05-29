@@ -43,11 +43,11 @@ export default async function CartPage() {
           Continue Shopping
         </Link>
 
-        {!isEmpty && (
-          <button className="rounded-lg bg-slate-950 px-5 py-3 text-white">
-            Checkout Coming Next
-          </button>
-        )}
+<form action="/api/checkout/create-session" method="POST">
+  <button className="rounded-lg bg-slate-950 px-5 py-3 text-white">
+    Checkout
+  </button>
+</form>
       </div>
     </main>
   );
