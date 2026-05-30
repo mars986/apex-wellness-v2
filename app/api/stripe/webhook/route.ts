@@ -33,7 +33,10 @@ export async function POST(request: Request) {
       console.log("Referral:", session.metadata?.referralCode);
       console.log("Provider:", session.metadata?.providerId);
       console.log("Cart:", session.metadata?.cart);
-
+console.log(
+  "Provider:",
+  session.metadata?.providerId
+);
       break;
     }
 

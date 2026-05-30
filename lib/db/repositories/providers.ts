@@ -25,3 +25,19 @@ export async function getProviderByUserId(
     .bind(userId)
     .first<ProviderSummary>();
 }
+export async function getProviderCommissionPercent(
+  db: D1Database,
+  providerId: string
+): Promise<number> {
+  const provider = await db
+    .prepare(`
+      SELECT commission_percent as commissionPercent
+      FROM providers
+      WHERE id = ?
+      LIMIT 1
+    `)
+    .bind(providerId)
+    .first<{ commissionPercent: number }>();
+
+  return provider?.commissionPercent ?? 15;
+}
