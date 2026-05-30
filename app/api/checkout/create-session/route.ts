@@ -11,6 +11,13 @@ export async function POST() {
     redirect("/cart?error=empty");
   }
 
+  const subtotalCents = cart.reduce((sum, item) => {
+    return sum + Math.round(Number(item.price.replace("$", "")) * 100) * item.quantity;
+  }, 0);
+
+  const discountCents = Math.round(subtotalCents * 0.15);
+  const totalCents = subtotalCents - discountCents;
+
   const lineItems = cart.map((item) => ({
     quantity: item.quantity,
     price_data: {
@@ -19,15 +26,24 @@ export async function POST() {
         name: item.name,
         description: item.variant,
       },
-      unit_amount: Math.round(
-        Number(item.price.replace("$", "")) * 100
-      ),
+      unit_amount: Math.round(Number(item.price.replace("$", "")) * 100),
     },
   }));
 
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     line_items: lineItems,
+    discounts: [],
+    metadata: {
+      referralCode: "DRSMITH15",
+      providerId: "prov_001",
+      referralCodeId: "ref_001",
+      customerId: "cust_guest",
+      subtotalCents: String(subtotalCents),
+      discountCents: String(discountCents),
+      totalCents: String(totalCents),
+      cart: JSON.stringify(cart),
+    },
     success_url: `${process.env.APP_URL}/checkout/success`,
     cancel_url: `${process.env.APP_URL}/cart`,
   });
